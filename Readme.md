@@ -95,27 +95,27 @@ Customer-churn/
 └── Readme.md
 ```
 
-##⚙️ Installation
+## ⚙️ Installation
 Prerequisites
 
 Python 3.10+
 
 ```pip```
 
-##(Optional) Docker Desktop
+## (Optional) Docker Desktop
 
 Create Virtual Environment (Recommended)
 python -m venv venv
 
 
-##Activate the environment:
+## Activate the environment:
 
 Windows
 
 ```venv\Scripts\activate```
 
 
-##Linux / macOS
+## Linux / macOS
 
 ```source venv/bin/activate```
 
@@ -137,14 +137,14 @@ If successful, you will see:
 
 ```Uvicorn running on http://127.0.0.1:8000```
 
-##📑 API Documentation (Swagger UI)
+## 📑 API Documentation (Swagger UI)
 
 Open in your browser:
 
 ```http://127.0.0.1:8000/docs```
 
 
-##Swagger UI allows interactive testing of the API.
+## Swagger UI allows interactive testing of the API.
 
 🔮 API Usage
 Endpoint
@@ -175,7 +175,7 @@ churn_probability — likelihood of customer churn
 
 prediction — binary classification (1 = churn, 0 = stay)
 
-##🐳 Docker
+## 🐳 Docker
 
 The application is containerized using Docker.
 

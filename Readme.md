@@ -95,63 +95,63 @@ Customer-churn/
 └── Readme.md
 ```
 
-⚙️ Installation
+##⚙️ Installation
 Prerequisites
 
 Python 3.10+
 
-pip
+```pip```
 
-(Optional) Docker Desktop
+##(Optional) Docker Desktop
 
 Create Virtual Environment (Recommended)
 python -m venv venv
 
 
-Activate the environment:
+##Activate the environment:
 
 Windows
 
-venv\Scripts\activate
+```venv\Scripts\activate```
 
 
-Linux / macOS
+##Linux / macOS
 
-source venv/bin/activate
+```source venv/bin/activate```
 
 Install Dependencies
-pip install -r requirements.txt
+```pip install -r requirements.txt```
 
 
 ⚠️ Important:
 The project requires scikit-learn==1.6.1 to ensure compatibility with the trained model.
 
-🚀 Running the API Locally
+##🚀 Running the API Locally
 
 From the project root directory:
 
-uvicorn app.main:app --reload
+```uvicorn app.main:app --reload```
 
 
 If successful, you will see:
 
-Uvicorn running on http://127.0.0.1:8000
+```Uvicorn running on http://127.0.0.1:8000```
 
-📑 API Documentation (Swagger UI)
+##📑 API Documentation (Swagger UI)
 
 Open in your browser:
 
-http://127.0.0.1:8000/docs
+```http://127.0.0.1:8000/docs```
 
 
-Swagger UI allows interactive testing of the API.
+##Swagger UI allows interactive testing of the API.
 
 🔮 API Usage
 Endpoint
 POST /predict
 
 Example Request
-{
+```{
   "credit_score": 650,
   "city": "Moscow",
   "gender": "Male",
@@ -163,30 +163,30 @@ Example Request
   "is_active": 0,
   "estimated_salary": 85000
 }
-
+```
 Example Response
-{
+```{
   "churn_probability": 0.78,
   "prediction": 1
 }
-
+```
 
 churn_probability — likelihood of customer churn
 
 prediction — binary classification (1 = churn, 0 = stay)
 
-🐳 Docker
+##🐳 Docker
 
 The application is containerized using Docker.
 
 Build Docker Image
-docker build -t churn-api .
+```docker build -t churn-api .```
 
 Run Docker Container
-docker run -p 8000:8000 churn-api
+```docker run -p 8000:8000 churn-api```
 
 
 Then open:
 
-http://127.0.0.1:8000/docs
+```http://127.0.0.1:8000/docs```
 

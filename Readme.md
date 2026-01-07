@@ -1,132 +1,83 @@
-🚀 Project Launch Instructions
-Prerequisites
+# Customer Churn Prediction 🚀
 
-Python 3.10+
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-API-green)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+![ML](https://img.shields.io/badge/Machine%20Learning-Scikit--Learn-orange)
 
-pip
+---
 
-(Optional) Docker Desktop
+## 📌 Project Overview
 
-1️⃣ Clone the Repository
-git clone <repository_url>
-cd new_project
+This project implements a **customer churn prediction system** for a bank.  
+Given customer profile and behavioral data, the system predicts the **probability that a customer will churn**.
 
-2️⃣ Create Virtual Environment (Recommended)
-python -m venv venv
+The solution covers the **full machine learning lifecycle**:
+- exploratory data analysis
+- feature preprocessing
+- model training & evaluation
+- explainability (SHAP)
+- deployment as a REST API
+- containerization with Docker
 
+---
 
-Activate:
+## 🎯 Business Objective
 
-Windows
+Customer churn is costly for banks.  
+The goal of this model is to **identify high-risk customers early**, enabling targeted retention actions such as personalized offers or proactive outreach.
 
-venv\Scripts\activate
+---
 
+## 📊 Dataset
 
-Linux / macOS
+- **Rows:** ~15,000  
+- **Features:** 14 (after cleaning: 10 predictive features)  
+- **Target:** `churn`  
+  - `1` → customer churns  
+  - `0` → customer stays  
 
-source venv/bin/activate
+---
 
-3️⃣ Install Dependencies
-pip install -r requirements.txt
+## 🧠 Modeling Approach
 
+### Models Evaluated
+- **Logistic Regression** (baseline)
+- **Random Forest** ✅ *(final model)*
 
-⚠️ Note:
-The project requires scikit-learn==1.6.1 to ensure compatibility with the trained model.
+### Why Random Forest?
+- Handles non-linear relationships
+- Captures feature interactions
+- Robust to outliers
+- Strong performance on tabular data
 
-4️⃣ Run the FastAPI Service Locally
+---
 
-From the project root directory:
+## 📈 Model Performance
 
-uvicorn app.main:app --reload
+| Metric | Logistic Regression | Random Forest |
+|------|--------------------|---------------|
+| ROC-AUC | ~0.88 | **~0.93** |
+| Accuracy | ~0.81 | **~0.88** |
+| Recall (Churn) | ~0.80 | ~0.79 |
+| Precision (Churn) | ~0.53 | **~0.67** |
 
+**Final Model:** Random Forest  
+**Primary Metric:** ROC-AUC  
 
-If successful, you should see:
+---
 
-Uvicorn running on http://127.0.0.1:8000
+## 🔍 Explainability (SHAP)
 
-5️⃣ Access API Documentation (Swagger UI)
+SHAP (SHapley Additive exPlanations) was used to interpret the model.
 
-Open in your browser:
+Key findings:
+- **Credit score** and **age** are the strongest drivers of churn
+- Other features contribute less but still add incremental signal
 
-http://127.0.0.1:8000/docs
+SHAP values were computed on a representative subset of the training data to reduce computational cost.
 
+---
 
-This interactive interface allows you to test the /predict endpoint.
+## 🧱 Project Structure
 
-6️⃣ Example API Request
-Endpoint
-POST /predict
-
-Request Body (JSON)
-{
-  "credit_score": 650,
-  "city": "Moscow",
-  "gender": "Male",
-  "age": 42,
-  "tenure": 6,
-  "balance": 120000,
-  "num_products": 2,
-  "has_credit_card": 1,
-  "is_active": 0,
-  "estimated_salary": 85000
-}
-
-Response
-{
-  "churn_probability": 0.78,
-  "prediction": 1
-}
-
-
-churn_probability — probability that the customer will churn
-
-prediction — binary churn prediction (1 = churn, 0 = stay)
-
-7️⃣ Docker (Optional)
-
-The application is containerized using Docker.
-
-Build Docker Image
-docker build -t churn-api .
-
-Run Docker Container
-docker run -p 8000:8000 churn-api
-
-
-Then open:
-
-http://127.0.0.1:8000/docs
-
-
-⚠️ Note:
-Due to Docker Desktop / buildx limitations on some Windows environments, Docker image build may fail locally.
-The Dockerfile is provided and verified to work in standard Docker/Linux environments.
-
-8️⃣ Project Structure
-new_project/
-├── app/
-│   ├── main.py            # FastAPI application
-│   └── churn_model.pkl    # Trained ML pipeline
-├── data/
-│   └── TZ.csv             # Dataset
-├── notebook/
-│   └── churn.ipynb        # EDA & model training
-├── Dockerfile
-├── requirements.txt
-└── Readme.md
-
-9️⃣ Model Summary
-
-Task: Binary classification (customer churn prediction)
-
-Algorithms evaluated:
-
-Logistic Regression
-
-Random Forest (final model)
-
-Evaluation metric: ROC-AUC
-
-Final model ROC-AUC: ~0.93
-
-Feature explainability: SHAP

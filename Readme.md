@@ -80,4 +80,132 @@ SHAP values were computed on a representative subset of the training data to red
 ---
 
 ## 🧱 Project Structure
+Customer-churn/
+├── app/
+│ ├── main.py # FastAPI application
+│ └── churn_model.pkl # Trained ML pipeline
+├── data/
+│ └── TZ.csv # Dataset
+├── notebook/
+│ └── churn.ipynb # EDA & model training
+├── Dockerfile
+├── requirements.txt
+└── Readme.md
+
+
+---
+
+## ⚙️ Installation
+
+### Prerequisites
+- Python **3.10+**
+- `pip`
+- (Optional) Docker Desktop
+
+### Create virtual environment (recommended)
+
+```bash
+python -m venv venv
+
+
+Activate:
+
+Windows
+
+venv\Scripts\activate
+
+
+Linux / macOS
+
+source venv/bin/activate
+
+Install dependencies
+pip install -r requirements.txt
+
+
+⚠️ Important:
+The project requires scikit-learn==1.6.1 to ensure compatibility with the trained model.
+
+🚀 Running the API Locally
+
+From the project root:
+
+uvicorn app.main:app --reload
+
+
+If successful, you will see:
+
+Uvicorn running on http://127.0.0.1:8000
+
+📑 API Documentation (Swagger UI)
+
+Open in browser:
+
+http://127.0.0.1:8000/docs
+
+
+Swagger UI allows interactive testing of the API.
+
+🔮 API Usage
+Endpoint
+POST /predict
+
+Example Request
+{
+  "credit_score": 650,
+  "city": "Moscow",
+  "gender": "Male",
+  "age": 42,
+  "tenure": 6,
+  "balance": 120000,
+  "num_products": 2,
+  "has_credit_card": 1,
+  "is_active": 0,
+  "estimated_salary": 85000
+}
+
+Example Response
+{
+  "churn_probability": 0.78,
+  "prediction": 1
+}
+
+
+churn_probability — likelihood of customer churn
+
+prediction — binary classification (1 = churn, 0 = stay)
+
+🐳 Docker
+
+The application is containerized using Docker.
+
+Build image
+docker build -t churn-api .
+
+Run container
+docker run -p 8000:8000 churn-api
+
+
+Then open:
+
+http://127.0.0.1:8000/docs
+
+
+⚠️ Note:
+Due to Docker Desktop / buildx limitations on some Windows environments, the image build may not execute locally.
+The Dockerfile is provided and verified to work in standard Docker/Linux environments.
+
+🏁 Conclusion
+
+This project demonstrates:
+
+end-to-end ML workflow
+
+strong model evaluation and explainability
+
+production-ready API design
+
+reproducible deployment with Docker
+
+The solution is suitable for real-world churn prevention use cases.
 
